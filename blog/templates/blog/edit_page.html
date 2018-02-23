@@ -5,16 +5,43 @@
     <title>Edit Page</title>
 </head>
 <body>
-<form action="" method="post">
+<form action="{% url 'blog:edit_action' %}" method="post">
+    <!--出于安全性，POST请求都需要加这句话，否则会报错403-->
+    {% csrf_token %}
+    {#        {% if article %}#}
+    {#            <input type="hidden" name="article_id" value="{{ article.id }}"/>#}
+    {#            <label>文章标题：#}
+    {#                <input type="text" name="title" value="{{ article.title }}"/>#}
+    {#            </label>#}
+    {#            <br/><br/>#}
+    {#            <label>文章内容：#}
+    {#                <input type="text" name="content" value="{{ article.content }}"/>#}
+    {#            </label>#}
+    {#            <br/><br/>#}
+    {#        {% else %}#}
+    {#            <input type="hidden" name="article_id" value="0"/>#}
+    {#            <label>文章标题：#}
+    {#                <input type="text" name="title"/>#}
+    {#            </label>#}
+    {#            <br/><br/>#}
+    {#            <label>文章内容：#}
+    {#                <input type="text" name="content"/>#}
+    {#            </label>#}
+    {#            <br/><br/>#}
+    {#        {% endif %}#}
+    {#        <input type="submit" value="提交">#}
+
+    {# 注意0左右不要有空格，否则会一起传值到后台 #}
+    <input type="hidden" name="article_id" value="{% if article %}{{ article.id }}{% else %}0{% endif %}"/>
     <label>文章标题：
-        <input type="text" name="title"/>
+        <input type="text" name="title" value="{% if article %}{{ article.title }}{% endif %}"/>
     </label>
-    <br/>
+    <br/><br/>
     <label>文章内容：
-        <input type="text" name="content"/>
+        <input type="text" name="content" value="{% if article %}{{ article.content }}{% endif %}"/>
     </label>
-    <br/>
-    <input type="submit">
+    <br/><br/>
+    <input type="submit" value="提交">
 </form>
 </body>
 </html>
