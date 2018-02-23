@@ -7,4 +7,5 @@ class Article(models.Model):
     content = models.TextField(null=True)  # 没有必选参数
 
     def __str__(self):
+        """Python语法，用于显示这个类的实例对象打印出来的效果"""
         return self.title
