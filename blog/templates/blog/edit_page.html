@@ -32,16 +32,30 @@
     {#        <input type="submit" value="提交">#}
 
     {# 注意0左右不要有空格，否则会一起传值到后台 #}
-    <input type="hidden" name="article_id" value="{% if article %}{{ article.id }}{% else %}0{% endif %}"/>
+    {#    <input type="hidden" name="article_id" value="{% if article %}{{ article.id }}{% else %}0{% endif %}"/>#}
+    {#    <label>文章标题：#}
+    {#        <input type="text" name="title" value="{% if article %}{{ article.title }}{% endif %}"/>#}
+    {#    </label>#}
+    {#    <br/><br/>#}
+    {#    <label>文章内容：#}
+    {#        <input type="text" name="content" value="{% if article %}{{ article.content }}{% endif %}"/>#}
+    {#    </label>#}
+    {#    <br/><br/>#}
+    {#    <input type="submit" value="提交">#}
+
+    {# 如果模版中出现了不存在的变量，Django不会报错，只会给一个空值 #}
+
+    <input type="hidden" name="article_id" value="{{ article.id | default:'0' }}"/>
     <label>文章标题：
-        <input type="text" name="title" value="{% if article %}{{ article.title }}{% endif %}"/>
+        <input type="text" name="title" value="{{ article.title }}"/>
     </label>
     <br/><br/>
     <label>文章内容：
-        <input type="text" name="content" value="{% if article %}{{ article.content }}{% endif %}"/>
+        <input type="text" name="content" value="{{ article.content }}"/>
     </label>
     <br/><br/>
     <input type="submit" value="提交">
+
 </form>
 </body>
 </html>
